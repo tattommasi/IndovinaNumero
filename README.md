@@ -16,7 +16,18 @@ Una partita può terminare perché il numero è stato indovinato, oppure perché son
 1. Lo stato di avanzamento (numero di tentativi già fatti rispetto a quelli totali) viene indicato con una ProgressBar.
 
 1. All'inizio della partita, l'utente può selezionare tra diversi livelli di difficoltà (ad esempio: Facile, Medio, Difficile). Ogni livello di difficoltà corrisponde ad un determinato valore di `NMAX` e di `TMAX`. 
-  _Nota_: si consiglia di impostare `TMAX` nell'ordine di Log_2(`NMAX`). 
+  _Nota_: si consiglia di impostare `TMAX` nell'ordine di Log_2(`NMAX`). Perché? 
 
 1. È possibile giocare in modalità "_assistita_", nella quale il programma mostra l'intervallo entro cui deve giacere il numero segreto, tenendo conto dei tentativi già fatti dall'utente, aggiornandolo ad ogni nuovo tentativo.
 
+1. Il programma impedisce che l'utente possa inserire più di una volta lo stesso numero.
+
+## Funziona, ma...
+
+* Codice duplicato
+
+* Impossibile da testare automaticamente (serve un giocatore umano)
+
+* Mix di codice relativo all'interfaccia con codice relativo all'algoritmo
+
+* Impossibile, in futuro, usare un'interfaccia diversa (console, web, touch, vocale, ...)
