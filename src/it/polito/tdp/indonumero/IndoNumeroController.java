@@ -82,6 +82,12 @@ public class IndoNumeroController {
     	try {
     		int num = Integer.parseInt(numS) ;
     		// numero era effettivamente un intero
+    		
+    		if(num<1 || num>NMAX) {
+    			txtLog.appendText("Valore fuori dall'intervallo consentito\n");
+    			return ;
+    		}
+    		
     		if(num==this.segreto) {
     			// ha indovinato
     			txtLog.appendText("Hai vinto!\n");
