@@ -48,14 +48,13 @@ public class IndoNumeroController {
     	
     	btnNuova.setDisable(true);
     	boxGioco.setDisable(false);
-    	txtCurr.setText(String.format("%d", this.tentativi));
-    	txtMax.setText(String.format("%d", this.TMAX));
+    	txtCurr.setText(String.format("%d", model.getTentativi()));
+    	txtMax.setText(String.format("%d", model.getTMAX()));
     	txtLog.clear() ;
     	txtTentativo.clear();
     	
     	txtLog.setText(String.format("Indovina un numero tra %d e %d\n",
-    			1, NMAX));
-
+    			1, model.getNMAX()));
 
     }
 
@@ -73,45 +72,38 @@ public class IndoNumeroController {
     		int num = Integer.parseInt(numS) ;
     		// numero era effettivamente un intero
     		
-    		if(num<1 || num>NMAX) {
+    		if(!model.valoreValido(num)) {
     			txtLog.appendText("Valore fuori dall'intervallo consentito\n");
     			return ;
     		}
     		
-    		if(num==this.segreto) {
+    		int risultato = model.tentativo(num) ;
+        	txtCurr.setText(String.format("%d", model.getTentativi()));
+    		
+    		if(risultato==0) {
     			// ha indovinato
     			txtLog.appendText("Hai vinto!\n");
+    		} else if(risultato<0) {
+    			txtLog.appendText("Troppo basso\n");
+    		} else {
+    			txtLog.appendText("Troppo alto\n");
+    		}
+    		
+    		if(!model.isInGame()) {
+    			// la partita è finita (vittoria o sconfitta)
     			
+    			if(risultato!=0) {
+        			txtLog.appendText("Hai perso!\n");
+        			txtLog.appendText(
+        					String.format("Il numero segreto era: %d\n",
+        							model.getSegreto())) ;
+    			}
+
     			// "chiudi" la partita
     			btnNuova.setDisable(false);
     			boxGioco.setDisable(true);
-    			this.inGame = false ;
-    		} else {
-    			// tentativo errato
-    			this.tentativi++ ;
-    	    	txtCurr.setText(String.format("%d", this.tentativi));
-    	    	
-    	    	if (this.tentativi==this.TMAX) {
-    	    		// ha perso
-    	    		txtLog.appendText(
-    	    				String.format("Hai perso! Il numero era: %d\n",
-    	    						this.segreto));
-        			// "chiudi" la partita
-        			btnNuova.setDisable(false);
-        			boxGioco.setDisable(true);
-        			this.inGame = false ;
-    	    	} else {
-    	    		// sono ancora in gioco
-    	    		if(num<segreto) {
-    	    			// troppo basso
-    	    			txtLog.appendText("Troppo basso\n");
-    	    		} else {
-    	    			// troppo alto
-    	    			txtLog.appendText("Troppo alto\n");
-    	    		}
-    	    	}
     		}
-    		
+    		    		
     	} catch(NumberFormatException ex) {
     		txtLog.appendText("Il dato inserito non è numerico\n");
     		return ;
