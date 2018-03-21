@@ -6,6 +6,9 @@ package it.polito.tdp.indonumero;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -126,6 +129,7 @@ public class IndoNumeroController {
 	public void setModel(Model model) {
 		this.model = model;
 		
-		txtCurr.textProperty().bindBidirectional(model.tentativiProperty(), new NumberStringConverter());
+		txtCurr.textProperty().bind(Bindings.convert(model.tentativiProperty()));
+		
 	}
 }
