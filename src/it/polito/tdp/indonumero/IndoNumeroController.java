@@ -1,5 +1,8 @@
 /**
- * Sample Skeleton for 'IndoNumero.fxml' Controller Class
+ * Controller per "Indovina il numero".
+ * 
+ * Delega gli aspetti algoritmici alla classe {@link Model}.
+ * Utilizza i <em>bindings<em> e le <em>property</em> per automatizzare l'aggiornamento dell'interfaccia
  */
 
 package it.polito.tdp.indonumero;
@@ -7,7 +10,6 @@ package it.polito.tdp.indonumero;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.util.converter.NumberStringConverter;
 
 public class IndoNumeroController {
 	
@@ -50,10 +51,6 @@ public class IndoNumeroController {
     	
     	model.newGame() ;
     	
-    	btnNuova.setDisable(true);
-    	boxGioco.setDisable(false);
-    	// txtCurr.setText(String.format("%d", model.getTentativi()));
-    	txtMax.setText(String.format("%d", model.getTMAX()));
     	txtLog.clear() ;
     	txtTentativo.clear();
     	
@@ -82,7 +79,6 @@ public class IndoNumeroController {
     		}
     		
     		int risultato = model.tentativo(num) ;
-        	// txtCurr.setText(String.format("%d", model.getTentativi()));
     		
     		if(risultato==0) {
     			// ha indovinato
@@ -102,10 +98,6 @@ public class IndoNumeroController {
         					String.format("Il numero segreto era: %d\n",
         							model.getSegreto())) ;
     			}
-
-    			// "chiudi" la partita
-    			btnNuova.setDisable(false);
-    			boxGioco.setDisable(true);
     		}
     		    		
     	} catch(NumberFormatException ex) {
@@ -129,7 +121,12 @@ public class IndoNumeroController {
 	public void setModel(Model model) {
 		this.model = model;
 		
+		// aggiorna automaticamente i tentativi totali e quelli fatti
 		txtCurr.textProperty().bind(Bindings.convert(model.tentativiProperty()));
+		txtMax.textProperty().bind(Bindings.convert(model.TMAXProperty()));
 		
+		// le aree dell'interfaccia si abilitano-disabilitano automaticamente in funzione di inGame
+		btnNuova.disableProperty().bind(model.inGameProperty());
+		boxGioco.disableProperty().bind(Bindings.not(model.inGameProperty()));
 	}
 }
