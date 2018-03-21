@@ -31,3 +31,9 @@ Una partita può terminare perché il numero è stato indovinato, oppure perché son
 * Mix di codice relativo all'interfaccia con codice relativo all'algoritmo
 
 * Impossibile, in futuro, usare un'interfaccia diversa (console, web, touch, vocale, ...)
+
+## Soluzioni
+
+Le soluzioni si trovano nel branch `soluzione_in_aula` ([vai al branch](https://github.com/TdP-2018/IndovinaNumero/tree/soluzione_in_aula)).
+
+I diversi passaggi intermedi sono segnalati nelle diverse [Release](https://github.com/TdP-2018/IndovinaNumero/releases) del progetto.
