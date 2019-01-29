@@ -21,7 +21,7 @@ public class IndoNumeroController {
 	private int secret; // number to guess
 	private int attempts; // attempts already done by the user
 	
-	private boolean inGame = false;
+	boolean inGame = false;
 		
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
