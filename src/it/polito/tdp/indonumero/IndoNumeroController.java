@@ -72,6 +72,11 @@ public class IndoNumeroController {
     	}
     	try {
     		int num = Integer.parseInt(numS);
+    		
+    		if(num<1 || num>NMAX) {
+    			txtLog.appendText("The value is not in the correct range!\n");
+    			return; //exit from the method
+    		}
     		if(num==this.secret) {
     			txtLog.appendText("Correct, you won!\n");
     			boxGame.setDisable(true);
