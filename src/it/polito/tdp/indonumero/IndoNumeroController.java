@@ -22,9 +22,7 @@ public class IndoNumeroController {
 	private int attempts; // attempts already done by the user
 	
 	private boolean inGame = false;
-	
-	
-	
+		
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -54,11 +52,15 @@ public class IndoNumeroController {
     	this.secret = (int)(Math.random()*NMAX)+1;
     	this.attempts = 0;
     	this.inGame = true;
-    	
+
     	btnNew.setDisable(true);
     	boxGame.setDisable(false);
     	txtCurrent.setText(String.format("%d", this.attempts));
     	txtMax.setText(String.format("%d", this.TMAX));
+    	
+		txtLog.clear();
+		txtNumber.clear();
+		txtLog.setText(String.format("Guess a number between %d and %d\n", 1, NMAX));
     }
 
     @FXML
@@ -74,10 +76,10 @@ public class IndoNumeroController {
     			txtLog.appendText("Correct, you won!\n");
     			boxGame.setDisable(true);
     			btnNew.setDisable(false);
-    			this.inGame = false;
-    			txtLog.clear();
-    			txtNumber.clear();
-    			txtLog.setText(String.format("Guess a number between %d and %d\n", 1, NMAX));
+    			//this.inGame = false;
+    			//txtLog.clear();
+    			//txtNumber.clear();
+    			//txtLog.setText(String.format("Guess a number between %d and %d\n", 1, NMAX));
     		}else {
     			this.attempts++;
     			txtCurrent.setText(String.format("%d", this.attempts));
@@ -86,10 +88,10 @@ public class IndoNumeroController {
     				txtLog.appendText(String.format("Sorry, game over! The number was: %d\n", this.secret));
         			boxGame.setDisable(true);
         			btnNew.setDisable(false);
-        			this.inGame = false;
-        			txtLog.clear();
-        			txtNumber.clear();
-        			txtLog.setText(String.format("Guess a number between %d and %d\n", 1, NMAX));
+        			//this.inGame = false;
+        			//txtLog.clear();
+        			//txtNumber.clear();
+        			//txtLog.setText(String.format("Guess a number between %d and %d\n", 1, NMAX));
         			
     			}else {
         			if(num>this.secret) {
